@@ -35,6 +35,14 @@ def generate_keypair(bits):
 
     return {'p': (n, e), 's': (n, d)}
 
+"""Encrypt m with key k"""
+def encrypt(m, k):
+    return _power(m, k['p'][1], k['s'][0])
+
+"""Decrypt c with key k"""
+def decrypt(c, k):
+    return _power(c, k['s'][1], k['s'][0])
+
 """Euclid's algorithm"""
 def gcd(a, b):
     if b == 0:
@@ -77,6 +85,7 @@ def _power(a, p, n):
         r = (x*x)%n
     if p%2 == 1:
         r = r*a;
+        r = r%n;
     return r;
 
 """Fermat's little theorem and non-trivial square root test"""
@@ -87,7 +96,7 @@ def _power2(a, p, n):
     else:
         x = _power(a, int(p/2), n);
         r = (x*x)%n
-        if r == 1 and x%n != 1 and x%n != n-1:
+        if r == 1 and x != 1 and x != n-1:
             prime = False;
     if p%2 == 1:
         r = r*a;
