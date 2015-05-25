@@ -73,31 +73,31 @@ def _mr_prime_test(n, witnesses):
         a = rand.randrange(2, n-1)
         (r, prime) = _power2(a, n-1, n)
         if r != 1 or not prime:
-            return False;
-    return True;
+            return False
+    return True
 
 """Compute a^p%n"""
 def _power(a, p, n):
     if p == 0:
-        r = 1;
+        r = 1
     else:
-        x = _power(a, int(p/2), n);
+        x = _power(a, int(p/2), n)
         r = (x*x)%n
     if p%2 == 1:
-        r = r*a;
-        r = r%n;
-    return r;
+        r = r*a
+        r = r%n
+    return r
 
 """Fermat's little theorem and non-trivial square root test"""
 def _power2(a, p, n):
-    prime = True;
+    prime = True
     if p == 0:
-        r = 1;
+        r = 1
     else:
-        x = _power(a, int(p/2), n);
+        x = _power(a, int(p/2), n)
         r = (x*x)%n
         if r == 1 and x != 1 and x != n-1:
-            prime = False;
+            prime = False
     if p%2 == 1:
-        r = r*a;
-    return (r, prime);
+        r = r*a
+    return (r, prime)
